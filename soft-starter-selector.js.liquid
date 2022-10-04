@@ -1,0 +1,413 @@
+$(window).ready(function() {
+    //--- VAR
+    var theResult = [
+        '', // Model Number - set when slide two builds based on selected model
+        '', // Connection - set on swatch select based on selected connection type and current color
+        '', // Color - set on swatch select based on current connection and selected color
+        '', // Part Number - selected from data obj using model + color + connection type
+        '', // Shopify variant - selected from data obj using model + color + connection type
+        '', // Shopify price - set when slide two builds based on selected model.
+        ''  // Compatibility - used when we need to check if the existing thermostat is supported
+    ]
+    var triggerBtn = $('.js-product-selector');
+    var theModal = $('#js-modal-wrapper');
+    var theModalBackground = $('#js-modal-background');
+    var closeModalBtn = $('#js-close-modal');
+    var items = $('.item');
+    var selectedModel = '';
+    var stepOne = $('#js-modal-step-1');
+    var stepTwo = $('#js-modal-step-2');
+    var stepResults = $('#js-modal-step-results');
+    var stepNotListed = $('#js-modal-not-listed');
+    var resultsBtn = $('#js-results-btn');
+    var errorNotice = $('#js-error-notice');
+    var isWired = false; // used to determine if -C suffix is needed in part number label
+    var backBtn = $('.js-back-button');
+    var cartBtn = $('#js-add-to-cart');
+    var outOfStock = $('#js-out-of-stock');
+    var validConnection = [false,false];
+    var validColor = [false,false];
+    var validCompatibility = [false,false];
+    var fadeTime = 250;
+
+    //--- FUNCTIONS
+    function openModal() {
+        theModalBackground.fadeIn(250);
+        theModal.fadeIn(fadeTime);
+    }
+
+    function closeModal() {
+        theModalBackground.fadeOut(fadeTime)
+        theModal.fadeOut(fadeTime);
+        setTimeout(reset,fadeTime);
+    }
+
+    function selectItem(e) {
+        e.preventDefault();
+        selectedModel = $(this).data('item');
+
+        // Call slide two and pass in selected model
+        slideTwo(selectedModel);
+
+        // Animate window back to top
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    function slideTwo(model) {
+        // Check if model exists in data object
+        if (softStarterSelector.products[model]) {
+
+            // Check if model is available
+            if(softStarterSelector.products[model].available === true) {
+                // Set step 2 model info
+                stepTwo.find('#js-model-image').attr('src',softStarterSelector.products[model].modelImage);
+                stepTwo.find('#js-model-title').html(softStarterSelector.products[model].modelTitle);
+                stepTwo.find('#js-model-description').html(softStarterSelector.products[model].modelDescription);
+
+                // Set step 2 connection info
+                var theConnections = softStarterSelector.products[model].connections;
+                if (theConnections.length > 0) {
+                    
+                    // Tell validation to check for connection
+                    validConnection[0] = true;
+
+                    stepTwo.find('#js-connection-options').removeClass('hidden');
+                    
+                    for (var i = 0; i < theConnections.length; i++) {
+                        var theConnection = '\
+                            <div class="connection js-connection" data-connection="' + theConnections[i].connection +'">\
+                                <div class="swatch ' + theConnections[i].connection + '">\
+                                    <div class="checkmark">\
+                                        <img src="' + "{{ 'checkmark.svg' | asset_url }}" + '" alt="checkmark">\
+                                    </div>';
+                        switch (theConnections[i].connection) {
+                            case 'clip':
+                                theConnection += '<img class="connection-thumbnail" src="' + "{{ 'etrv_ma_harness.jpg'| asset_url }}" + ' alt="clip connection">';
+                                break;
+
+                            case 'wired':
+                                theConnection += '<img class="connection-thumbnail" src="' + "{{ 'connectors-wire-nuts.jpg'| asset_url }}" + '" alt="wired connection"></img>';
+                                break;
+                            
+                            case 'push':
+                                theConnection += '<img class="connection-thumbnail" src="' + "{{ 'cole-push-connector.jpg'| asset_url }}" + '" alt="gray push connection"></img>';
+                                break;
+                            
+                            case 'harness':
+                                theConnection += '<img class="connection-thumbnail" src="' + "{{ 'easy-touch-352-harness.png'| asset_url }}" + '" alt="easy touch harness"></img>';
+                                break;
+
+                            case 'not-sure':
+                                theConnection += '<img class="connection-thumbnail" src="' + "{{ 'connectors-not-sure.png'| asset_url }}" + '" alt="not sure of connection"></img>';
+                                break;
+                            
+                            default:
+                                theConnection += '';
+                        }
+                        theConnection += '\
+                                </div>\
+                                <p>' + theConnections[i].label + '</p>\
+                            </div>';
+                        stepTwo.find('#js-connections').append(theConnection);
+                    }
+                } else {
+                    theResult[1] = null;
+                }
+
+                // Set step 2 colorway info
+                var theColorways = softStarterSelector.products[model].colorways;
+                if (theColorways.length > 0) {
+                    
+                    // Tell validation to check for color
+                    validColor[0] = true;
+                    
+                    stepTwo.find('#js-colorways').removeClass('hidden');
+                    
+                    for (var i = 0; i < theColorways.length; i++) {
+                        var theColor = '\
+                            <div class="color js-color" data-color="' + theColorways[i].color +'">\
+                                <div class="swatch ' + theColorways[i].color + '">\
+                                    <div class="checkmark">\
+                                        <img src="' + "{{ 'checkmark.svg' | asset_url }}" +'" alt="checkmark">\
+                                    </div>\
+                                </div>\
+                                <p>' + theColorways[i].label + '</p>\
+                            </div>';
+                        stepTwo.find('#js-colors').append(theColor);
+                    }
+                } else {
+                    theResult[2] = null;
+                }
+
+                // Set step 2 compatibility options
+                var theCompatibleModels = softStarterSelector.products[model].compatibility;
+                var notListedOption = '<option value="not listed">My model is not listed</option>'
+                if ( theCompatibleModels.length > 0) {
+
+                    // Validate compatibility
+                    validCompatibility[0] = true;
+                    $('.error-connection').remove();
+
+                    stepTwo.find('#js-compatibility').removeClass('hidden');
+
+                    for (var i = 0; i < theCompatibleModels.length; i++) {
+                        var theModel = '<option value="">' + theCompatibleModels[i] + '</option>';
+                        stepTwo.find('#js-compatibility-select').append(theModel);
+                    }
+                    stepTwo.find('#js-compatibility-select').append(notListedOption);
+                    
+                } else {
+                    console.log('no model check needed');
+                }
+
+                // Hide left column if there are no connections or colorways
+                if ( theConnections.length === 0 && theColorways.length === 0 ) {
+                    $('.options').addClass('hidden');
+                    $('.product-details').addClass('full-width');
+                }
+
+                // Set results model
+                theResult[0] = softStarterSelector.products[model].resultModel;
+
+                // Close step 1 and open step 2
+                stepOne.addClass('hidden');
+                stepTwo.removeClass('hidden');
+            }
+        }
+    }
+
+    function setConnection() {
+
+        // Validate connection
+        validConnection[1] = true;
+        $('.error-connection').remove();
+
+        $('.connections .swatch').removeClass('selected');
+        $(this).find('.swatch').addClass('selected');
+
+        // Set results connection
+        theResult[1] = $(this).data('connection');
+
+        // Set global variable for is wired
+        if (
+            theResult[1] === 'wired' ||
+            theResult[1] === 'harness' ||
+            theResult[1] === 'not-sure'
+        ) {
+            isWired = true;
+        } else {
+            isWired = false;
+        }
+
+    }
+
+    function setColor() {
+        
+        // Validate color
+        validColor[1] = true;
+        $('.error-color').remove();
+
+        $('.colors .swatch').removeClass('selected');
+        $(this).find('.swatch').addClass('selected');
+
+        // Set results color
+        theResult[2] = $(this).data('color');
+    }
+
+    function setCompatibility() {
+
+        // Validate compatibility
+        validCompatibility[1] = true;
+        $('.error-compatibility').remove();
+
+        // Set the compatibility option
+        theResult[7] = $('#js-compatibility-select').val();
+        console.log(theResult);
+    }
+
+    function checkValidation() {
+        // Clear existing errors before checking again
+        errorNotice.html('');
+
+        var validationPassed = [false, false, false];
+        
+        if (validConnection[0] === true) {
+            validationPassed[0] = validConnection[1];
+        } else {
+            validationPassed[0] = null;
+        }
+
+        if (validColor[0] === true) {
+            validationPassed[1] = validColor[1];
+        } else {
+            validationPassed[1] = null;
+        }
+
+        if (validCompatibility[0] === true) {
+            validationPassed[2] = validCompatibility[1];
+        } else {
+            validationPassed[2] = null;
+        }
+
+        // Approve or return error message
+        if (validationPassed[0] != false && validationPassed[1] != false && validationPassed[2] != false ) {
+            slideResults();
+        } else {
+            
+            // Connection missing
+            if (validationPassed[0] === false) {
+                errorNotice.append('<li class="error-message error-connection">No connection was selected. Please select a connection option.</li>');
+            }
+
+            // Color missing
+            if (validationPassed[1] === false) {
+                errorNotice.append('<li class="error-message error-color">No color was selected. Please select a color preference.</li>');
+            }
+
+            // Compatibility missing
+            if (validationPassed[2] === false) {
+                errorNotice.append('<li class="error-message error-compatibility">No existing model was selected. Please select an option from the list.</li>');
+            }
+        }
+    }
+
+    function slideResults() {
+        if (theResult[7] != 'not listed') {
+            // theResult[3] (Get Part Number)
+            theResult[3] = softStarterSelector['partNumbers'][theResult[0]][theResult[1]][theResult[2]];
+
+            // theResult[4] (Get Shopify Variant);
+            theResult[4] = softStarterSelector['shopifyVariants'][theResult[3]];
+
+            // Set results slide info
+            if (isWired === true) {
+                stepResults.find('#js-result-model').html('Easy Touch RV ' + theResult[0] + 'C');
+            } else {
+                stepResults.find('#js-result-model').html('Easy Touch RV ' + theResult[0]);
+            }
+            
+            // Set Part Number
+            stepResults.find('#js-result-part').html('Part Number: ' + theResult[3]);
+            
+            // Show the result image and set color text based on the desired/appropriate color option
+            switch (theResult[2]) {
+                case 'black':
+                    stepResults.find('#js-result-image').attr('src',"{{ 'micro-air-black.png' | asset_url }}");
+                    stepResults.find('#js-result-color').html('Color: Black');
+                    break;
+
+                case 'white':
+                    stepResults.find('#js-result-image').attr('src',"{{ 'micro-air-white.png' | asset_url }}");
+                    stepResults.find('#js-result-color').html('Color: White');
+                    break;
+            }
+
+            // Set variant price and check if it's available
+            $.getJSON(window.Shopify.routes.root + 'products/micro-air-easytouch-rv-thermostat.js', function(product) {
+                console.log(product);
+                var variantIndex = product.variants.map(object => object.id).indexOf(theResult[4]);
+                var variantPrice = product.variants[variantIndex].price;
+                var variantAvailability = product.variants[variantIndex].available;
+                var variantPriceString = variantPrice.toString();
+                theResult[5] = "$" + variantPriceString.substr(0,variantPriceString.length-2) + "." + variantPriceString.substr(variantPriceString.length-2, variantPrice.length);
+                stepResults.find('#js-result-price').html('Price: ' + theResult[5]);
+
+                // Toggle add to cart buttons if this variant is available.
+                if (variantAvailability === true) {
+                    cartBtn.removeClass('d-none');
+                } else if (variantAvailability === false) {
+                    outOfStock.removeClass('d-none');
+                };
+
+            } );        
+
+            // Close step 2 and open results
+            stepTwo.addClass('hidden');
+            stepResults.removeClass('hidden');
+        } else {
+            // Close step 2 and open results
+            stepTwo.addClass('hidden');
+            stepNotListed.removeClass('hidden');
+        }
+
+        // Animate window back to top
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });        
+    }
+
+    function addToCart() {
+        $.ajax({
+            type: "POST",
+            url: '/cart/add.js',
+            data: {
+                quantity: 1,
+                id: theResult[4]
+            },
+            dataType: 'json',
+            success: function() {
+                $.getJSON('/cart.js', function(cart) {
+                    var result = cart.item_count;
+                    $('#CartCount > span:first-child').html(result);
+                });
+                closeModal();
+                window.location.href = "/cart";
+            },
+        });
+    }
+
+    function reset() {
+        // Hide all slides and display the first slide
+        stepOne.removeClass('hidden');
+        stepTwo.addClass('hidden');
+        stepResults.addClass('hidden');
+
+        // Empty result var
+        theResult = ["","","","","","",""];
+
+        // Empty the connections and colors
+        stepTwo.find('#js-connection-options').addClass('hidden');
+        stepTwo.find('#js-connections').html('');
+        stepTwo.find('#js-colorways').addClass('hidden');
+        stepTwo.find('#js-colors').html('');
+        $('.options').removeClass('hidden');
+        $('.product-details').removeClass('full-width');
+
+        // Reset results
+        stepResults.find('#js-result-model').html('');
+        stepResults.find('#js-result-color').html('');
+        stepResults.find('#js-result-price').html('');
+        stepResults.find('#js-result-image').attr('src','');
+        cartBtn.addClass('d-none');
+        outOfStock.addClass('d-none');
+
+        // Reset Not Listed
+        stepNotListed.addClass('hidden');
+
+        // Reset compatibility select
+        stepTwo.find('#js-compatibility').addClass('hidden');
+        stepTwo.find('#js-compatibility-select').val('');
+        stepTwo.find('#js-compatibility-select').html('<option value="" disabled selected>Select your existing model</option>');
+
+        // Reset validation
+        validConnection = [false,false];
+        validColor = [false,false];
+        errorNotice.html('');
+    }
+
+    //--- INIT
+    triggerBtn.on('click', openModal);
+    closeModalBtn.on('click', closeModal);
+    items.on('click', selectItem);
+    resultsBtn.on('click', checkValidation);
+    backBtn.on('click', reset);
+    cartBtn.on('click', addToCart);
+    
+    $(document).on('click', '.js-color', setColor);
+    $(document).on('click', '.js-connection', setConnection);
+    $(document).on('change', '#js-compatibility-select', setCompatibility);
+});
