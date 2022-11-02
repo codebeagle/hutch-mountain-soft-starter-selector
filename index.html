@@ -1,162 +1,105 @@
-<div id="js-modal-background" class="modal-background"></div>
-<div id="js-modal-wrapper" class="modal-wrapper hidden">
-    <section id="js-modal" class="soft-starter-selector">
-        <button id="js-close-modal" class="close-modal">
-            <svg class="icon-close" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.5899 2.39005C16.1367 1.84329 16.1367 0.956825 15.5899 0.410068C15.0432 -0.136689 14.1567 -0.136689 13.6099 0.410068L8.00001 6.02001L2.39007 0.410068C1.84331 -0.136688 0.956842 -0.136689 0.410085 0.410068C-0.136672 0.956825 -0.136671 1.84329 0.410085 2.39005L6.02002 7.99999L0.410067 13.6099C-0.136689 14.1567 -0.136689 15.0432 0.410067 15.5899C0.956824 16.1367 1.84329 16.1367 2.39005 15.5899L8.00001 9.97997L13.61 15.5899C14.1567 16.1367 15.0432 16.1367 15.5899 15.5899C16.1367 15.0432 16.1367 14.1567 15.5899 13.6099L9.97999 7.99999L15.5899 2.39005Z" fill="#3D4246"/>
-            </svg>                        
-        </button>
-        
-        <div id="js-modal-step-1" class="modal-step-1">
-            <div class="modal-head">
-                <h3>Select Your Thermostat</h3>
-                <p>Click or tap a thermostat from this list below.</p>
-                <p class="modal-step">Step 1 / 2</p>
-            </div>
-            <div class="slide-content-wrapper">
-                <div class="item-list">
-                    <div class="logo-row">
-                        <img src="{{ 'logo-dometic.png' | asset_url }}" alt="Dometic logo">
-                    </div>
-                    <div class="items">
-                        <a href="" class="item" data-item="dom-analog">
-                            <img src="{{ 'dom_analog.jpg' | asset_url }}" alt="">
-                            <p>Dometic Duotherm (Analog)</p>
-                        </a>
-                        <a href="" class="item" data-item="dom-dou-dz">
-                            <img src="{{ 'dom_dou_sz.jpg' | asset_url }}" alt="">
-                            <p>10 or 12 button model</p>
-                        </a>
-                        <a href="" class="item" data-item="dom-ct">
-                            <img src="{{ 'dom-ct.jpg' | asset_url }}" alt="">
-                            <p></p>
-                        </a>
-                        <a href="" class="item" data-item="dom-sz-lcd">
-                            <img src="{{ 'dom_sz_lcd.jpg' | asset_url }}" alt="">
-                            <p></p>
-                        </a>
-                        <a href="" class="item" data-item="dom-cc-dt">
-                            <img src="{{ 'dom_cc_dt.jpg' | asset_url }}" alt="">
-                            <p>5 button control</p>
-                        </a>
-                        <a href="" class="item" data-item="dom-cc-4btn">
-                            <img src="{{ 'dom_cc_4btn.jpg' | asset_url }}" alt="">
-                            <p>4 button control<br>Partially Compatible (see description)</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="item-list">
-                    <div class="logo-row">
-                        <img src="{{ 'logo-coleman.png' | asset_url }}" alt="Coleman logo">
-                        <img src="{{ 'logo-atwood.png' | asset_url }}" alt="Atwood logo">
-                    </div>
-                    <div class="items">
-                        <a href="" class="item" data-item="cole-9000-zc">
-                            <img src="{{ 'cole_9000-zc.jpg' | asset_url }}" alt="">
-                            <p>Multi Zone</p>
-                        </a>
-                        <a href="" class="item" data-item="cole-tslide-12vdc">
-                            <img src="{{ 'cole_tslide_12vdc.jpg' | asset_url }}" alt="">
-                            <p>12 VDC controlled units only</p>
-                        </a>
-                        <a href="" class="item" data-item="cole-mzzc8000-horz">
-                            <img src="{{ 'cole-zc-slide.jpg' | asset_url }}" alt="">
-                            <p>"ZC" model with slide button</p>
-                        </a>
-                        <a href="" class="item" data-item="cole-sshphcac-vert">
-                            <img src="{{ 'cole_sshphcac-vert.jpg' | asset_url }}" alt="">
-                            <p>Single Zone</p>
-                        </a>
-                        <a href="" class="item" data-item="cole-2btn-hp">
-                            <img src="{{ 'cole-2btn-hp.jpg' | asset_url }}" alt="">
-                            <p>RVComfort<br>HP, HC, AC models</p>
-                        </a>
-                        <a href="" class="item" data-item="cole-2btn-php">
-                            <img src="{{ 'cole-2btn-php.jpg' | asset_url }}" alt="">
-                            <p>RVComfort<br>PHP models</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="item-list">
-                    <div class="logo-row">
-                        <img src="{{ 'logo-furrion.png' | asset_url }}" alt="Furrion logo">
-                    </div>
-                    <div class="items">
-                        <a href="" class="item" data-item="furrion-sz-mz">
-                            <img src="{{ 'furrion-sz-mz.jpg' | asset_url }}" alt="">
-                            <p>Single or Multi Zone</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+<html>
+    <head>
+        <title>Soft Starter Selector Build Environment</title>
+        <link rel="stylesheet" href="soft-starter-selector-style.css">
+    </head>
+    <body>
+        <button class="js-soft-starter-selector">Trigger Selector</button>
 
-        <div id="js-modal-step-2" class="modal-step-2 hidden">
-            <div class="modal-head">
-                <h3>Select Options</h3>
-                <p class="modal-step"><button class="back-button js-back-button">{{ 'back-button-product-selector.svg' | asset_url | img_tag: 'back button' }} Back</button> Step 2 / 2</p>
-            </div>
-            <div class="slide-content-wrapper">
-                <div class="options">
-                    <div id="js-connection-options" class="option hidden">
-                        <p class="option-label"><strong>Select Connection Type</strong></p>
-                        <div id="js-connections" class="connections"></div>
+        <div id="js-modal-background" class="modal-background"></div>
+        <div id="js-modal-wrapper" class="modal-wrapper hidden">
+            <section id="js-modal" class="soft-starter-selector">
+                <button id="js-close-modal" class="close-modal">
+                    <svg class="icon-close" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.5899 2.39005C16.1367 1.84329 16.1367 0.956825 15.5899 0.410068C15.0432 -0.136689 14.1567 -0.136689 13.6099 0.410068L8.00001 6.02001L2.39007 0.410068C1.84331 -0.136688 0.956842 -0.136689 0.410085 0.410068C-0.136672 0.956825 -0.136671 1.84329 0.410085 2.39005L6.02002 7.99999L0.410067 13.6099C-0.136689 14.1567 -0.136689 15.0432 0.410067 15.5899C0.956824 16.1367 1.84329 16.1367 2.39005 15.5899L8.00001 9.97997L13.61 15.5899C14.1567 16.1367 15.0432 16.1367 15.5899 15.5899C16.1367 15.0432 16.1367 14.1567 15.5899 13.6099L9.97999 7.99999L15.5899 2.39005Z" fill="#3D4246"/>
+                    </svg>                        
+                </button>
+                
+                <div id="js-modal-step-1" class="modal-step-1">
+                    <div class="modal-head">
+                        <h3>Select Your Application</h3>
+                        <p>Click or tap an application from the options below.</p>
+                        <p class="modal-step">Step 1 / 2</p>
                     </div>
-                    <div id="js-colorways" class="option hidden">
-                        <p class="option-label"><strong>Select Your Color Preference</strong></p>
-                        <div id="js-colors" class="colors"></div>
+                    <div class="slide-content-wrapper">
+                        <div class="item-list">
+                            <p class="item-list-title">RV & Marine</p>
+                            <div class="items">
+                                <a href="" class="item" data-group="recreation" data-item="roofTopUnit">
+                                    <img src="" alt="">
+                                    <p>Title for Application</p>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div id="js-compatibility" class="option hidden">
-                        <label for="compatibility" class="option-label"><strong>Check For Compatibility</strong></label>
-                        <p>Share with us your current thermostat model listed in your owner's manual, on the back of the thermostat, or the mounting plate. Note that the * character in this list means any character is a match.</p>
-                        <select name="compatibility" id="js-compatibility-select" class="compatibility">
-                            <option value="" disabled selected>Select your existing model</option>
-                        </select>
-                    </div>
-                    <button id="js-results-btn" class="btn-modal">Get Model Recommendation</button>
-                    <ul id="js-error-notice" class="error-notice"></ul>
                 </div>
-                <div class="product-details">
-                    <div class="product-image-wrapper">
-                        <img id="js-model-image" src="" alt="">
-                    </div>
-                    <h2 id="js-model-title"></h2>
-                    <p id="js-model-description"></p>
-                </div>
-            </div>
-        </div>
 
-        <div id="js-modal-step-results" class="result hidden">
-            <div class="modal-head">
-                <h3>Our Recommendation</h3>
-                <p class="modal-step"><button class="back-button js-back-button">{{ 'back-button-product-selector.svg' | asset_url | img_tag: 'back button' }} Reset</button></p>
-            </div> 
-            <div class="slide-content-wrapper">
-                <div class="summary">
-                    <h2 id="js-result-model"></h2>
-                    <p id="js-result-part"></p>
-                    <p id="js-result-color"></p>
-                    <p id="js-result-price"></p>
-                    <button id="js-add-to-cart" class="btn-modal add-to-cart d-none">Add to Cart</button>
-                    <p id="js-out-of-stock" class="out-of-stock d-none">Sold Out</p>
+                <div id="js-modal-step-2" class="modal-step-2 hidden">
+                    <div class="modal-head">
+                        <h3>Select Options</h3>
+                        <p class="modal-step"><button class="back-button js-back-button">{{ 'back-button-product-selector.svg' | asset_url | img_tag: 'back button' }} Back</button> Step 2 / 2</p>
+                    </div>
+                    <div class="slide-content-wrapper">
+                        <div class="options">
+                            <div id="js-voltage-options" class="option hidden">
+                                <p class="option-label"><strong>Select Voltage</strong></p>
+                                <div id="js-voltage" class="voltage"></div>
+                            </div>
+                            <div id="js-btu-options" class="option hidden">
+                                <p class="option-label"><strong>Select BTUs</strong></p>
+                                <div id="js-btus" class="btus"></div>
+                            </div>
+                            <button id="js-results-btn" class="btn-modal">Get Model Recommendation</button>
+                            <ul id="js-error-notice" class="error-notice"></ul>
+                        </div>
+                        <div class="product-details">
+                            <div class="product-image-wrapper">
+                                <img id="js-model-image" src="" alt="">
+                            </div>
+                            <h2 id="js-model-title"></h2>
+                            <p id="js-model-description"></p>
+                        </div>
+                    </div>
                 </div>
-                <div class="product-image">
-                    <img id="js-result-image" src="" alt="">
-                </div>
-            </div>
-        </div>
 
-        <div id="js-modal-not-listed" class="not-listed hidden">
-            <div class="modal-head">
-                <h3>Our Recommendation</h3>
-                <p class="modal-step"><button class="back-button js-back-button">{{ 'back-button-product-selector.svg' | asset_url | img_tag: 'back button' }} Reset</button></p>
-            </div> 
-            <div class="not-listed-content-wrapper">
-                <h2>Contact Us for Options</h2>
-                <p>You indicated that your existing thermostat model wasn't listed, but it may still compatibile! Contact us by phone or email and we can help find the best option for your model.</p>
-                <p>Phone: 435-494-1975</p>
-                <p>Email: info@hutchmountain.com</p>
-            </div>
+                <div id="js-modal-step-results" class="result hidden">
+                    <div class="modal-head">
+                        <h3>Our Recommendation</h3>
+                        <p class="modal-step"><button class="back-button js-back-button">{{ 'back-button-product-selector.svg' | asset_url | img_tag: 'back button' }} Reset</button></p>
+                    </div> 
+                    <div class="slide-content-wrapper">
+                        <div class="summary">
+                            <h2 id="js-result-model"></h2>
+                            <p id="js-result-part"></p>
+                            <p id="js-result-color"></p>
+                            <p id="js-result-price"></p>
+                            <button id="js-add-to-cart" class="btn-modal add-to-cart d-none">Add to Cart</button>
+                            <p id="js-out-of-stock" class="out-of-stock d-none">Sold Out</p>
+                        </div>
+                        <div class="product-image">
+                            <img id="js-result-image" src="" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="js-modal-not-listed" class="not-listed hidden">
+                    <div class="modal-head">
+                        <h3>Our Recommendation</h3>
+                        <p class="modal-step"><button class="back-button js-back-button">{{ 'back-button-product-selector.svg' | asset_url | img_tag: 'back button' }} Reset</button></p>
+                    </div> 
+                    <div class="not-listed-content-wrapper">
+                        <h2>Contact Us for Options</h2>
+                        <p>You indicated that your existing thermostat model wasn't listed, but it may still compatibile! Contact us by phone or email and we can help find the best option for your model.</p>
+                        <p>Phone: 435-494-1975</p>
+                        <p>Email: info@hutchmountain.com</p>
+                    </div>
+                </div>
+            </section>
         </div>
-    </section>
-</div>
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <script src="/soft-starter-selector-obj.js"></script>
+        <script src="/soft-starter-selector.js"></script>
+    </body>
+</html>
+
+
