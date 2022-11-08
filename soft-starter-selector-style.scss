@@ -194,7 +194,7 @@ $white: #FFFFFF;
             align-items: center;
             justify-content: center;
             border: solid 1px $light-gray;
-            padding: 10px 20px ;
+            padding: 10px 15px ;
             height: 200px;
             position: relative;
 
@@ -226,8 +226,8 @@ $white: #FFFFFF;
             }
 
             img {
-                max-width: 260px;
-                max-height: 120px;
+                max-width: 150px;
+                max-height: 90px;
                 width: 100%;
                 object-fit: contain;
             }
@@ -437,6 +437,10 @@ $white: #FFFFFF;
 @media screen and (min-width: 768px) {
     .soft-starter-selector {
         padding: 45px;
+
+        .items {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
 }
 
@@ -449,7 +453,7 @@ $white: #FFFFFF;
         }
 
         .items {
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
         }
 
         .btn-modal {
@@ -519,5 +523,9 @@ $white: #FFFFFF;
 @media screen and (min-width: 1080px) {
     .soft-starter-selector {
         padding: 60px;
+
+        .items {
+            grid-template-columns: repeat(5, 1fr);
+        }
     }
 }

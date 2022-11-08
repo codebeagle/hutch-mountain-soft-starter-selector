@@ -60,9 +60,9 @@ $(window).ready(function() {
         theItem = softStarterSelector.products[group][model];
 
         // Set step 2 model info
-        stepTwo.find('#js-model-image').attr('src',theItem.modelImage);
-        stepTwo.find('#js-model-title').html(theItem.modelTitle);
-        stepTwo.find('#js-model-description').html(theItem.modelDescription);
+        stepTwo.find('#js-model-image').attr('src',theItem.typeImage);
+        stepTwo.find('#js-model-title').html(theItem.typeTitle);
+        stepTwo.find('#js-model-description').html(theItem.typeDescription);
 
         // Setup step 2 Voltage options
         var theVoltages = theItem.voltage;
@@ -78,7 +78,7 @@ $(window).ready(function() {
                     <div class="volt js-voltage" data-voltage="' + theVoltages[i].volts +'">\
                         <div class="swatch volt-swatch volt-' + theVoltages[i].volts + '">\
                             <div class="checkmark">\
-                                <img src="' + "{{ 'checkmark.svg' | asset_url }}" +'" alt="checkmark">\
+                                <img src="' + "images/checkmark.svg" +'" alt="checkmark">\
                             </div>\
                         </div>\
                         <p>' + theVoltages[i].label + '</p>\
@@ -105,9 +105,10 @@ $(window).ready(function() {
 
             // Set results voltage
             theResult[1] = $(this).data('voltage');
-            console.log('theResult[1]= ' + theResult[1]);
 
             // Setup BTU options
+            stepTwo.find('#js-btu-options').addClass('hidden');
+            stepTwo.find('#js-btus').html('');
             setupBTU(theResult[1]);
         }
 
@@ -129,7 +130,7 @@ $(window).ready(function() {
                         <div class="btu js-btu" data-btu="' + theBTUs[i].btu +'">\
                             <div class="swatch btu-swatch btu-' + theBTUs[i].btu + '">\
                                 <div class="checkmark">\
-                                    <img src="' + "{{ 'checkmark.svg' | asset_url }}" +'" alt="checkmark">\
+                                    <img src="' + "images/checkmark.svg" +'" alt="checkmark">\
                                 </div>\
                             </div>\
                             <p>' + theBTUs[i].label + '</p>\
@@ -153,7 +154,6 @@ $(window).ready(function() {
 
             // Set results color
             theResult[2] = $(this).data('btu');
-            console.log('theResult[2]= ' + theResult[2]);
         }
 
         function checkValidation() {
@@ -196,30 +196,23 @@ $(window).ready(function() {
         var resultModel = ''; // concatonate this way because strings are stored in theResults array
         resultModel += theResult[1];
         resultModel += theResult[2];
-        console.log(resultModel);
 
-        // Set the recommended product
-        theResult[3] = softStarterSelector.products[selectedGroup][selectedModel].resultModels[resultModel].model;
-        console.log(theResult[3]);
+        // Set the recommended product and shopify variant
+        theResult[3] = softStarterSelector.products[selectedGroup][selectedModel].resultModels[resultModel].part;
+        theResult[4] = softStarterSelector.products[selectedGroup][selectedModel].resultModels[resultModel].shopifyVariant;
+        console.log(theResult[4]);
 
         // Temp Output
-        stepResults.find('#js-result-part').html('You selected ' + theResult[0] + ' for an application with a voltage of ' + theResult[1] + ' and a BTU range of ' + theResult[2] + '.<br><br>The recommended model is ' + theResult[3] + '.');
+        //stepResults.find('#js-result-part').html('You selected ' + theResult[0] + ' for an application with a voltage of ' + theResult[1] + ' and a BTU range of ' + theResult[2] + '.<br><br>The recommended model is ' + theResult[3] + '.');
 
-        // Set Part Number
-        // stepResults.find('#js-result-part').html('Part Number: ' + theResult[3]);
-        
-        // Show the result image and set color text based on the desired/appropriate color option
-        // switch (theResult[2]) {
-        //     case 'black':
-        //         stepResults.find('#js-result-image').attr('src',"{{ 'micro-air-black.png' | asset_url }}");
-        //         stepResults.find('#js-result-color').html('Color: Black');
-        //         break;
+        // Set result slide text elements
+        stepResults.find('#js-result-model').html(softStarterSelector.products[selectedGroup][selectedModel].resultModels[resultModel].model);
+        stepResults.find('#js-result-part').html('Part Number: ' + theResult[3]);
 
-        //     case 'white':
-        //         stepResults.find('#js-result-image').attr('src',"{{ 'micro-air-white.png' | asset_url }}");
-        //         stepResults.find('#js-result-color').html('Color: White');
-        //         break;
-        // }
+        // Set result image
+        var resultImage = 'images/';
+        resultImage += softStarterSelector.products[selectedGroup][selectedModel].resultModels[resultModel].image;
+        stepResults.find('#js-result-image').attr('src', resultImage);
 
         // Set variant price and check if it's available
         // $.getJSON(window.Shopify.routes.root + 'products/micro-air-easytouch-rv-thermostat.js', function(product) {

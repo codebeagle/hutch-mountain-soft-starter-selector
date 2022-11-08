@@ -25,9 +25,58 @@
                         <div class="item-list">
                             <p class="item-list-title">RV & Marine</p>
                             <div class="items">
-                                <a href="" class="item" data-group="recreation" data-item="roofTopUnit">
-                                    <img src="" alt="">
-                                    <p>Title for Application</p>
+                                <a href="" class="item" data-group="recreation" data-item="roofTop">
+                                    <img src="images/application-icon.png" alt="">
+                                    <p>Roof Top Unit</p>
+                                </a>
+                                <a href="" class="item" data-group="recreation" data-item="basement">
+                                    <img src="images/application-icon.png" alt="">
+                                    <p>Basement Unit</p>
+                                </a>
+                                <a href="" class="item" data-group="recreation" data-item="underCounter">
+                                    <img src="images/application-icon.png" alt="">
+                                    <p>Under Counter Unit</p>
+                                </a>
+                                <a href="" class="item" data-group="recreation" data-item="portable">
+                                    <img src="images/application-icon.png" alt="">
+                                    <p>Portable Unit</p>
+                                </a>
+                                <a href="" class="item" data-group="recreation" data-item="window">
+                                    <img src="images/application-icon.png" alt="">
+                                    <p>Window Unit</p>
+                                </a>
+                                <a href="" class="item" data-group="recreation" data-item="chiller">
+                                    <img src="images/application-icon.png" alt="">
+                                    <p>Chiller Unit</p>
+                                </a>
+                                <a href="" class="item" data-group="recreation" data-item="selfContained">
+                                    <img src="images/application-icon.png" alt="">
+                                    <p>Self Contained Unit</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="item-list">
+                            <p class="item-list-title">Residential</p>
+                            <div class="items">
+                                <a href="" class="item" data-group="residential" data-item="centralAir">
+                                    <img src="images/application-icon.png" alt="">
+                                    <p>Central Air</p>
+                                </a>
+                                <a href="" class="item" data-group="residential" data-item="waterSourceHeatPump">
+                                    <img src="images/application-icon.png" alt="">
+                                    <p>Water Source Heat Pump</p>
+                                </a>
+                                <a href="" class="item" data-group="residential" data-item="split">
+                                    <img src="images/application-icon.png" alt="">
+                                    <p>Split Unit</p>
+                                </a>
+                                <a href="" class="item" data-group="residential" data-item="portable">
+                                    <img src="images/application-icon.png" alt="">
+                                    <p>Portable Unit</p>
+                                </a>
+                                <a href="" class="item" data-group="residential" data-item="window">
+                                    <img src="images/application-icon.png" alt="">
+                                    <p>Window Unit</p>
                                 </a>
                             </div>
                         </div>
@@ -37,7 +86,8 @@
                 <div id="js-modal-step-2" class="modal-step-2 hidden">
                     <div class="modal-head">
                         <h3>Select Options</h3>
-                        <p class="modal-step"><button class="back-button js-back-button">{{ 'back-button-product-selector.svg' | asset_url | img_tag: 'back button' }} Back</button> Step 2 / 2</p>
+                        <!-- <p class="modal-step"><button class="back-button js-back-button">{{ 'back-button-product-selector.svg' | asset_url | img_tag: 'back button' }} Reset</button></p> -->
+                        <p class="modal-step"><button class="back-button js-back-button"><img src="images/back-button-product-selector.svg" alt=""> Back</button></p>
                     </div>
                     <div class="slide-content-wrapper">
                         <div class="options">
@@ -65,13 +115,13 @@
                 <div id="js-modal-step-results" class="result hidden">
                     <div class="modal-head">
                         <h3>Our Recommendation</h3>
-                        <p class="modal-step"><button class="back-button js-back-button">{{ 'back-button-product-selector.svg' | asset_url | img_tag: 'back button' }} Reset</button></p>
+                        <!-- <p class="modal-step"><button class="back-button js-back-button">{{ 'back-button-product-selector.svg' | asset_url | img_tag: 'back button' }} Reset</button></p> -->
+                        <p class="modal-step"><button class="back-button js-back-button"><img src="images/back-button-product-selector.svg" alt=""> Reset</button></p>
                     </div> 
                     <div class="slide-content-wrapper">
                         <div class="summary">
                             <h2 id="js-result-model"></h2>
                             <p id="js-result-part"></p>
-                            <p id="js-result-color"></p>
                             <p id="js-result-price"></p>
                             <button id="js-add-to-cart" class="btn-modal add-to-cart d-none">Add to Cart</button>
                             <p id="js-out-of-stock" class="out-of-stock d-none">Sold Out</p>
