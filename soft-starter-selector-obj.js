@@ -24,12 +24,12 @@ var softStarterSelector = {
                     },
                     {
                         'btu': '<12K',
-                        'label': '< 12K | 3.5KW',
+                        'label': '< 12K',
                         'voltage': ['240V']
                     },
                     {
-                        'btu': '12K-20K',
-                        'label': '12K-20K | 3.5K-5.8K',
+                        'btu': '12K-18K',
+                        'label': '12K-18K',
                         'voltage': ['240V']
                     }
                 ],
@@ -46,7 +46,7 @@ var softStarterSelector = {
                         'model': 'MicroAir EasyStart™ 364',
                         'shopifyVariant': '37359968354453'
                     },
-                    '240V12K-20K': {
+                    '240V12K-18K': {
                         'part': 'ASY-364-X36-BLUE',
                         'image': 'easystart-placeholder.jpg',
                         'model': 'MicroAir EasyStart™ 364',
@@ -119,12 +119,12 @@ var softStarterSelector = {
                     },
                     {
                         'btu': '<12K',
-                        'label': '<12K | 3.5KW',
+                        'label': '<12K',
                         'voltage': ['240V']
                     },
                     {
-                        'btu': '12-24K',
-                        'label': '12-24K | 3.5-5.8KW',
+                        'btu': '12-18K',
+                        'label': '12-18K',
                         'voltage': ['240V']
                     }
                 ],
@@ -147,7 +147,7 @@ var softStarterSelector = {
                         'model': 'MicroAir EasyStart™ 364',
                         'shopifyVariant': ''
                     },
-                    '240V12-24K': {
+                    '240V12-18K': {
                         'part': 'ASY-364-X36-BLUE',
                         'image': 'easystart-placeholder.jpg',
                         'model': 'MicroAir EasyStart™ 364',
@@ -183,12 +183,12 @@ var softStarterSelector = {
                     },
                     {
                         'btu': '<12K',
-                        'label': '<12K | 3.5KW',
+                        'label': '<12K',
                         'voltage': ['240V']
                     },
                     {
-                        'btu': '12-24K',
-                        'label': '12-24K | 3.5-5.8KW',
+                        'btu': '12-18K',
+                        'label': '12-18K',
                         'voltage': ['240V']
                     }
                 ],
@@ -211,7 +211,7 @@ var softStarterSelector = {
                         'model': 'MicroAir EasyStart™ 364',
                         'shopifyVariant': ''
                     },
-                    '240V12-24K': {
+                    '240V12-18K': {
                         'part': 'ASY-364-X36-BLUE',
                         'image': 'easystart-placeholder.jpg',
                         'model': 'MicroAir EasyStart™ 364',
@@ -247,12 +247,12 @@ var softStarterSelector = {
                     },
                     {
                         'btu': '<12K',
-                        'label': '<12K | 3.5KW',
+                        'label': '<12K',
                         'voltage': ['240V']
                     },
                     {
-                        'btu': '12-24K',
-                        'label': '12-24K | 3.5-5.8KW',
+                        'btu': '12-18K',
+                        'label': '12-18K',
                         'voltage': ['240V']
                     }
                 ],
@@ -275,7 +275,7 @@ var softStarterSelector = {
                         'model': 'MicroAir EasyStart™ 364',
                         'shopifyVariant': ''
                     },
-                    '240V12-24K': {
+                    '240V12-18K': {
                         'part': 'ASY-364-X36-BLUE',
                         'image': 'easystart-placeholder.jpg',
                         'model': 'MicroAir EasyStart™ 364',
@@ -296,35 +296,35 @@ var softStarterSelector = {
                 ],
                 'btus': [
                     {
-                        'btu': '16-30K',
-                        'label': '16-30K | 3.5-5.8KW',
+                        'btu': '12-18K',
+                        'label': '12-18K',
                         'voltage': ['240V']
                     },
                     {
-                        'btu': '31-48K',
-                        'label': '31-48K | 4.0-8.0KW',
+                        'btu': '19-42K',
+                        'label': '19-42K',
                         'voltage': ['240V']
                     },
                     {
-                        'btu': '49-72K',
-                        'label': '49-72K | 14.0-21.0KW',
+                        'btu': '43-72K',
+                        'label': '43-72K',
                         'voltage': ['240V']
                     }
                 ],
                 'resultModels': {
-                    '240V16-30K': {
+                    '240V12-18K': {
                         'part': 'ASY-364-X36-BLUE',
                         'image': 'easystart-placeholder.jpg',
                         'model': 'MicroAir EasyStart™ 364',
                         'shopifyVariant': ''
                     },
-                    '240V31-48K': {
+                    '240V19-42K': {
                         'part': 'ASY-368-X48-BLUE',
                         'image': 'easystart-placeholder.jpg',
                         'model': 'MicroAir EasyStart™ 368',
                         'shopifyVariant': ''
                     },
-                    '240V49-72K': {
+                    '240V43-72K': {
                         'part': 'ASY-368-X72-BLUE',
                         'image': 'easystart-placeholder.jpg',
                         'model': 'MicroAir EasyStart™ 368',
@@ -350,22 +350,22 @@ var softStarterSelector = {
                 'btus': [
                     {
                         'btu': '<9K',
-                        'label': '<9K | 2.7KW',
+                        'label': '<9K',
                         'voltage': ['120V']
                     },
                     {
                         'btu': '>9K',
-                        'label': '>9K | 2.7KW',
+                        'label': '>9K',
                         'voltage': ['120V']
                     },
                     {
                         'btu': '5-12K',
-                        'label': '5-12K | 1.5-3.5KW',
+                        'label': '5-12K',
                         'voltage': ['240V']
                     },
                     {
-                        'btu': '12-24K',
-                        'label': '12-24K | 3.5-5.8KW',
+                        'btu': '12-18K',
+                        'label': '12-18K',
                         'voltage': ['240V']
                     }
                 ],
@@ -388,7 +388,7 @@ var softStarterSelector = {
                         'model': 'MicroAir EasyStart™ 364',
                         'shopifyVariant': ''
                     },
-                    '240V12-24K': {
+                    '240V12-18K': {
                         'model': 'ASY-364-X36-BLUE',
                         'image': 'easystart-placeholder.jpg',
                         'model': 'MicroAir EasyStart™ 364',
@@ -411,35 +411,35 @@ var softStarterSelector = {
                 ],
                 'btus': [
                     {
-                        'btu': '16-30K',
-                        'label': '16-30K | 4.0-8.0KW',
+                        'btu': '12-18K',
+                        'label': '12-18K',
                         'voltage': ['240V']
                     },
                     {
-                        'btu': '31-48K',
-                        'label': '31-48K | 9.0-14.0KW',
+                        'btu': '19-42K',
+                        'label': '19-42K',
                         'voltage': ['240V']
                     },
                     {
-                        'btu': '49-72K',
-                        'label': '49-72K | 14.0-21.0KW',
+                        'btu': '43-72K',
+                        'label': '43-72K',
                         'voltage': ['240V']
                     },
                 ],
                 'resultModels': {
-                    '240V16-30K': {
+                    '240V12-18K': {
                         'part': 'ASY-364-X36-BLUE',
                         'image': 'easystart-placeholder.jpg',
                         'model': 'MicroAir EasyStart™ 364',
                         'shopifyVariant': ''
                     },
-                    '240V31-48K': {
+                    '240V19-42K': {
                         'part': 'ASY-368-X48-BLUE',
                         'image': 'easystart-placeholder.jpg',
                         'model': 'MicroAir EasyStart™ 368',
                         'shopifyVariant': ''
                     },
-                    '240V49-72K': {
+                    '240V43-72K': {
                         'part': 'ASY-368-X72-BLUE',
                         'image': 'easystart-placeholder.jpg',
                         'model': 'MicroAir EasyStart™ 368',
@@ -460,24 +460,24 @@ var softStarterSelector = {
                 ],
                 'btus': [
                     {
-                        'btu': '24-36K',
-                        'label': '24-36K | 7.0-10.0KW',
+                        'btu': '12-18K',
+                        'label': '12-18K',
                         'voltage': ['240V']
                     },
                     {
-                        'btu': '37-72K',
-                        'label': '37-72K | 10.0-21.0KW',
+                        'btu': '43-72K',
+                        'label': '43-72K',
                         'voltage': ['240V']
                     }
                 ],
                 'resultModels': {
-                    '240V24-36K': {
+                    '240V12-18K': {
                         'part': 'ASY-364-X36-BLUE',
                         'image': 'easystart-placeholder.jpg',
                         'model': 'MicroAir EasyStart™ 364',
                         'shopifyVariant': ''
                     },
-                    '240V37-72K': {
+                    '240V43-72K': {
                         'part': 'ASY-368-X72-BLUE',
                         'image': 'easystart-placeholder.jpg',
                         'model': 'MicroAir EasyStart™ 368',
@@ -503,22 +503,22 @@ var softStarterSelector = {
                 'btus': [
                     {
                         'btu': '<9K',
-                        'label': '<9K | 2.7KW',
+                        'label': '<9K',
                         'voltage': ['120V']
                     },
                     {
                         'btu': '>9K',
-                        'label': '>9K | 2.7KW',
+                        'label': '>9K',
                         'voltage': ['120V']
                     },
                     {
                         'btu': '<12K',
-                        'label': '<12K | 3.5KW',
+                        'label': '<12K',
                         'voltage': ['240V']
                     },
                     {
-                        'btu': '12-24K',
-                        'label': '12-24K | 3.5-5.8KW',
+                        'btu': '12-18K',
+                        'label': '12-18K',
                         'voltage': ['240V']
                     }
                 ],
@@ -541,7 +541,7 @@ var softStarterSelector = {
                         'model': 'MicroAir EasyStart™ 364',
                         'shopifyVariant': ''
                     },
-                    '240V12-24K': {
+                    '240V12-18K': {
                         'model': 'ASY-364-X36-BLUE',
                         'image': 'easystart-placeholder.jpg',
                         'model': 'MicroAir EasyStart™ 364',
@@ -577,12 +577,12 @@ var softStarterSelector = {
                     },
                     {
                         'btu': '<12K',
-                        'label': '<12K | 3.5KW',
+                        'label': '<12K',
                         'voltage': ['240V']
                     },
                     {
-                        'btu': '12-24K',
-                        'label': '12-24K | 3.5-5.8KW',
+                        'btu': '12-18K',
+                        'label': '12-18K',
                         'voltage': ['240V']
                     }
                 ],
@@ -605,7 +605,7 @@ var softStarterSelector = {
                         'model': 'MicroAir EasyStart™ 364',
                         'shopifyVariant': ''
                     },
-                    '240V12-24K': {
+                    '240V12-18K': {
                         'part': 'ASY-364-X36-BLUE',
                         'image': 'easystart-placeholder.jpg',
                         'model': 'MicroAir EasyStart™ 364',
@@ -645,8 +645,8 @@ var softStarterSelector = {
                         'voltage': ['240V']
                     },
                     {
-                        'btu': '12-24K',
-                        'label': '12-24K | 3.5-5.8KW',
+                        'btu': '12-18K',
+                        'label': '12-18K',
                         'voltage': ['240V']
                     }
                 ],
@@ -669,7 +669,7 @@ var softStarterSelector = {
                         'model': 'MicroAir EasyStart™ 364',
                         'shopifyVariant': ''
                     },
-                    '240V12-24K': {
+                    '240V12-18K': {
                         'part': 'ASY-364-X36-BLUE',
                         'image': 'easystart-placeholder.jpg',
                         'model': 'MicroAir EasyStart™ 364',
